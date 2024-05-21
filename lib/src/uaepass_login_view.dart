@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../uaepass.dart';
 import 'configuration.dart';
 import 'helper.dart';
 
@@ -79,15 +78,15 @@ class _UaepassLoginViewState extends State<UaepassLoginView> {
                   final code = Uri.parse(url).queryParameters['code']!;
                   Navigator.pop(context, code);
                 } else if (url.contains('cancelled')) {
-                  if (Uaepass.instance.showMessages) {
-                    ScaffoldMessenger.of(context)
-                      ..removeCurrentSnackBar()
-                      ..showSnackBar(
-                        const SnackBar(
-                          content: Text('User cancelled login with UAE Pass'),
-                        ),
-                      );
-                  }
+                  // if (Uaepass.instance.showMessages) {
+                  //   ScaffoldMessenger.of(context)
+                  //     ..removeCurrentSnackBar()
+                  //     ..showSnackBar(
+                  //       const SnackBar(
+                  //         content: Text('User cancelled login with UAE Pass'),
+                  //       ),
+                  //     );
+                  // }
                   Navigator.pop(context);
                 }
                 return null;
