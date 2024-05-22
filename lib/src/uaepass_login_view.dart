@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 import 'configuration.dart';
 import 'helper.dart';
+import 'model/uae_pass_response.dart';
 
 class UaepassLoginView extends StatefulWidget {
   const UaepassLoginView({Key? key}) : super(key: key);
@@ -76,7 +77,10 @@ class _UaepassLoginViewState extends State<UaepassLoginView> {
 
                 if (url.contains('code=')) {
                   final code = Uri.parse(url).queryParameters['code']!;
-                  Navigator.pop(context, code);
+                  final UaePassResult result = UaePassResult();
+                  result.status = UaePassStatus.success;
+                  result.code = code;
+                  Navigator.pop(context, result);
                 } else if (url.contains('cancelled')) {
                   // if (Uaepass.instance.showMessages) {
                   //   ScaffoldMessenger.of(context)
@@ -87,8 +91,14 @@ class _UaepassLoginViewState extends State<UaepassLoginView> {
                   //       ),
                   //     );
                   // }
-                  Navigator.pop(context);
+                  final UaePassResult result = UaePassResult();
+                  result.status = UaePassStatus.cancelled;
+
+                  Navigator.pop(context, result);
                 }
+                final UaePassResult result = UaePassResult();
+                result.status = UaePassStatus.cancelled;
+                Navigator.pop(context, result);
                 return null;
               },
             ),
